@@ -1,0 +1,19 @@
+# LA LEY DE LOS GRANDES NÚMEROS │ VITAL EN ESTADÍSTICA Y PROBABILIDAD
+#Versión de JJAE
+
+#Inicializamos un vector con 7.500 columnas 
+vector = vector(length = 7500)
+
+# Lanzamos el dado 5.000 veces 
+muestra = sample(c(1,2,3,4,5,6),7500,replace = T,prob = c(1/6,1/6,1/6,1/6,1/6,1/6))
+
+# Calculamos la media para un n de 1 a 7.500 - n es el tamaño de la muestra 
+for (i in 1:7500){
+  vector[i]=mean(muestra[1:i])
+}
+
+# Graficamos el resultado
+library(ggplot2)
+i=1:7500 #index
+ggplot()+geom_line(aes(i,vector),col="darkred",size=1.25)+geom_hline(yintercept = 3.5,linetype="dotted")+theme_minimal()+
+  ggtitle("TEORÍA DE GRANDES NÚMEROS (dado balanceado)")+xlab("n")+ylab(expression(bar(Xn)))
